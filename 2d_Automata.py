@@ -1,14 +1,15 @@
-# -*- coding: utf-8 -*-
 """
 Created on Tue Feb 23 16:09:09 2016
 
-@author: Metis
+@author: Jamie Graham
 """
 from __future__ import division
 import numpy as np
 import matplotlib.pyplot as plt
 import pyfits
 
+""" Code to produce a given 2D cellular automata using matplotlib to plot.
+"""
 timesteps = 20
 rule = 19
 
@@ -45,13 +46,16 @@ def twod(image, rule, timesteps):
     for t in xrange(timesteps):
         for i in xrange(x_size):
             for j in xrange(y_size):
-                next_image[i,j] = check_locality(rule, [image[i,(j+1)%y_size], image[(i-1)%x_size,j], image[i,j], image[(i+1)%x_size,j], image[i,(j-1)%y_size]])
+                next_image[i,j] = check_locality(rule, 
+                                                [image[i,(j+1)%y_size], 
+                                                image[(i-1)%x_size,j], 
+                                                image[i,j], 
+                                                image[(i+1)%x_size,j], 
+                                                image[i,(j-1)%y_size]])
         image = next_image.copy()
         next_image = np.ones((x_size, y_size))
     return image
     
-    
-print format(rule, '032b')
         
 size=50
 seed = np.ones((size,size))
@@ -60,9 +64,6 @@ seed[25,25] = 0
 #seed[26,25] = 0
 #seed[25,24] = 0
 #seed[25,26] = 0
-
-im = pyfits.open('CenALobes.fits')[0].data
-#seed = Threshold(im,np.percentile(im, 85))
 
 for i in range(10007147, 10010000, 2):
     image = twod(seed, i, timesteps)

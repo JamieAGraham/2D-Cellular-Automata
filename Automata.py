@@ -2,12 +2,15 @@
 """
 Created on Mon Feb 15 12:51:16 2016
 
-@author: Metis
+@author: Jamie Graham
 """
 from __future__ import division
 import numpy as np
 import matplotlib.pyplot as plt
 
+""" Simple 1D interpretation of CA. Slightly messier than the 2D version
+    due to the if statements..."""
+    
 def bin_conv(array):
     array = array[::-1]
     cnt = 0
